@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Category, Product } = require('../../models');
+const { Category, Product, Tag, ProductTag } = require('../../models');
 const { sync } = require('../../models/Product');
 
 // The `/api/categories` endpoint
@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
     });
     res.status(200).json(categoriesData);
   }catch (err) {
-    res.status(500).json(err);
+    res.status(500).json(err)
   }
   // be sure to include its associated Products
 });
@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
   // create a new category
   try {
     const newCategoryData = await Category.create(req.body);
-    res.status(200).json(newCategoryData);
+    res.status(201).json(newCategoryData);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -58,14 +58,33 @@ router.put('/:id', async (req, res) => {
         }
       }
     );
+    if (!updatedCategory) {
+      res.status(404).json({message: 'No category found with this id.'});
+      return;
+    }
+
     res.status(201).json(updatedCategory);
   }catch (err) {
     res.status(400).json(err);
   }
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   // delete a category by its `id` value
+  try {
+    const deleteCategory = await Category.destroy({
+      where: {
+        id: req.params.id
+      }
+    });
+    if(!deleteCategory){
+      res.status(404).json({message: 'No category found with this id.'});
+      return;
+    }
+    res.status(200).json(deleteCategory);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;
