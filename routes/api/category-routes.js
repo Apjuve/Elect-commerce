@@ -14,12 +14,10 @@ router.get('/', async (req, res) => {
   }catch (err) {
     res.status(500).json(err)
   }
-  // be sure to include its associated Products
 });
 
+// Route to get a single categort by the id and include the product.
 router.get('/:id', async(req, res) => {
-  // find one category by its `id` value
-  // be sure to include its associated Products
   try {
     const singleCategoryData = await Category.findByPk(req.params.id, {
       include: [{ model: Product, as: 'products'}]
@@ -45,8 +43,8 @@ router.post('/', async (req, res) => {
   }
 });
 
+// update a category by its `id` 
 router.put('/:id', async (req, res) => {
-  // update a category by its `id` value
   try {
     const updateCategory = await Category.update(
       {
@@ -69,8 +67,8 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+// delete a category by its `id` value
 router.delete('/:id', async (req, res) => {
-  // delete a category by its `id` value
   try {
     const deleteCategory = await Category.destroy({
       where: {
