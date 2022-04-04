@@ -1,9 +1,13 @@
+// Require sequelize in order to use syntax in sequelize to create a new model
 const { Model, DataTypes } = require('sequelize');
 
+// Require connection in order to sync with database
 const sequelize = require('../config/connection.js');
 
+// Define category as a new model
 class Category extends Model {}
 
+// Initialize the catergory model by creating columns and setting up fields
 Category.init(
   {
     // define columns
@@ -27,4 +31,5 @@ Category.init(
   }
 );
 
+// Export model in order to be used in index to define association to other models and to be used in routes
 module.exports = Category;
