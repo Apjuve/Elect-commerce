@@ -7,23 +7,27 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 router.get('/', async(req, res) => {
   // find all products
   try {
+    // Using the findAll method in the sequelize library get all Products in database
     const productsData = await Product.findAll({
+      // Include category this product falls under and the tags for products through the ProductTag model
       include: [{model:Category, as: 'category'}, {model: Tag, through: ProductTag, as: 'tagIds'}]
     });
+    // Set status to 200 if there is no errors then return all of the products in json format
     res.status(200).json(productsData);
   } catch (err) {
+    // If there are any errors they will be in the catch, a status of 500 will be returned and the error will be returned
     res.status(500).json(err)
   }
 });
-
+// Route to get or find a single product based on its 'id' value
 router.get('/:id', async(req, res) => {
-  // find a single product by its `id`
-  // be sure to include its associated Category and Tag data
   try {
+    // Using the findByPk method in order to return a single product using the req.params.id to specify which product to return
     const singleProductData = await Product.findByPk(req.params.id, {
       include: [{model: Category, as: 'category'}, {model: Tag, through: ProductTag, as: 'tagIds'}]
     });
 
+    // If there is no product with the id in the params part of the url then a 404 status is returned and an error message in json format
     if (!singleProductData) {
       res.status(404).json({message: 'No product found with this id.'});
       return;
@@ -110,6 +114,20 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete one product by its `id` value
+  try {
+    const deletedProduct = await Product.destroy({
+      where: {
+        id: req.params.id
+      }
+    });
+    if(!deletedProduct){
+      res.status(404).json({message: 'There is no product with this id.'});
+      return;
+    }
+    res.status(200).json(deletedProduct);
+  }catch (err) {
+    res.status(500).json(deletedProduct);
+  }
 });
 
 module.exports = router;

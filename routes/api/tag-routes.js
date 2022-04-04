@@ -22,7 +22,7 @@ router.get('/', async(req, res) => {
   }
 });
 
-// find a single tag by its `id`
+// route to find a single tag by its `id`
 router.get('/:id', async(req, res) => {
   
   try {
@@ -35,9 +35,10 @@ router.get('/:id', async(req, res) => {
       res.status(404).json({ message: 'No tag found with this id.'});
       return;
     }
-
+    // If there are no errors return a status of 200 and the tags data in json format
     res.status(200).json(singleTagData);
   }catch (err) {
+    // If there are any errors they will be in the catch, a 500 status code is returned aswell as the error
     res.status(500).json(err);
   }
 });
