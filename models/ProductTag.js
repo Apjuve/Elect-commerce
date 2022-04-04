@@ -1,9 +1,12 @@
+// Require important parts from sequelize library in order to create a model
 const { Model, DataTypes } = require('sequelize');
 
+// Require connection in order to connect to database
 const sequelize = require('../config/connection');
 
 class ProductTag extends Model {}
 
+// Initialize ProductTag model by setting up fields and rules
 ProductTag.init(
   {
     // define columns
@@ -13,6 +16,7 @@ ProductTag.init(
       primaryKey: true,
       autoIncrement: true
   },
+  // Set a foreign key for product_id by referencing the id column in the 'products' model
   product_id: {
     type: DataTypes.INTEGER, 
     references: {
@@ -21,6 +25,7 @@ ProductTag.init(
       unique: false
     }
   },
+  // Set a foreign key for tag_id by referencing the id column in the 'tags' model
   tag_id: {
     type: DataTypes.INTEGER,
     references: {
@@ -39,4 +44,6 @@ ProductTag.init(
   }
 );
 
+
+// Export model in order to define association to other models in index file and to be used in routes
 module.exports = ProductTag;

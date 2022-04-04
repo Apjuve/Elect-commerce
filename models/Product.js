@@ -52,4 +52,5 @@ Product.init(
   }
 );
 
+// Export model in order to be used in routes and defining association with other models
 module.exports = Product;
