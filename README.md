@@ -18,16 +18,16 @@
 
 ## Description
 
-This application allows the user to create and edit notes. It was built with JavaScript, Node.js, Express, and Heroku. When the user navigates to the application, they see a landing page with a "Get Started" button. From there, they can navigate to the note taking page and start creating notes. Only notes with a title and body can be saved. Once a note is created and saved, the user can click on it in the notes list to reopen and edit that note.
+This application allows the user to manage the database of an e-commerce store. Users can keep track of stock, update items in the db, remove items, and add new items. This is all done from the command line using Node.js, Express, MySQL, and Sequelize.  
  
 ## Technologies
-* HTML
-* CSS
-* Express
-* UUID V4
-* Heroku
 * JavaScript
 * Node.js
+* SQL
+* Express
+* dotenv
+* Sequelize
+* MySQL2 npm package
 
 
 ## Functionality
@@ -72,4 +72,6 @@ The application uses Express, Node.js, MySQL, and Segeulize to enable users to m
 
 ## License
 
-MIT
+[MIT](https://opensource.org/licenses/MIT)
+
+![badge](https://img.shields.io/static/v1?label=License&message=MIT&color=success)
