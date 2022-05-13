@@ -36,6 +36,17 @@ The application uses Express, Node.js, MySQL, and Segeulize to enable users to m
 
 ## Demo
 
+#### <p align="center">This demo shows the GET by Id routes running in Insomnia:</P>
+
+https://user-images.githubusercontent.com/95586383/168326949-6d3b2cfe-51d7-4f98-9913-70923811b92c.mp4
+
+#### <p align="center">This demo shows the POST, PUT, and DELETE routes running in Insomnia:</p>
+
+https://user-images.githubusercontent.com/95586383/168327561-7f99f653-9205-4849-804d-4d69d8854e3b.mp4
+
+
+
+
 
 ## Example Note Taker
 #### 
